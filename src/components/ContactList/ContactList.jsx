@@ -23,9 +23,9 @@ export const ContactList = ({ contacts, onDeleteContact }) => {
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
-      id: PropTypes.any.isRequired,
+      id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      number: PropTypes.any.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ).isRequired,
   onDeleteContact: PropTypes.func.isRequired,
