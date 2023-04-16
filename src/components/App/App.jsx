@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
-import { Container, Title, SubTitle } from './App.styled';
+import { Container, Title, SubTitle, MessageEmptyList } from './App.styled';
 
 const initialState = [
   { id: nanoid(), name: 'Rosie Simpson', number: '459-12-56' },
@@ -26,14 +26,16 @@ export class App extends Component {
 
   formSubmitHandler = contact => {
     const { contacts } = this.state;
-    const isExist = contacts.some(({ name }) => name === contact.name);
+    const isExist = contacts.some(
+      ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
+    );
 
     if (isExist) {
       alert(`${contact.name} is already in contacts.`);
       return;
     }
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
+      contacts: [...prevState.contacts, { ...contact, id: nanoid() }],
     }));
   };
 
@@ -50,18 +52,27 @@ export class App extends Component {
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     const filteredContacts = this.getFilteredContacts();
     return (
       <Container>
         <Title>Phonebook</Title>
         <ContactForm onSubmit={this.formSubmitHandler} />
         <SubTitle>Contacts</SubTitle>
-        <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={filteredContacts}
-          onDeleteContact={this.deleteContact}
-        />
+        {!!contacts.length ? (
+          <>
+            <Filter value={filter} onChange={this.changeFilter} />
+            <ContactList
+              contacts={filteredContacts}
+              onDeleteContact={this.deleteContact}
+            />
+          </>
+        ) : (
+          <MessageEmptyList>
+            Unfortunately, there is no contact here. Please enter your first
+            contact
+          </MessageEmptyList>
+        )}
       </Container>
     );
   }

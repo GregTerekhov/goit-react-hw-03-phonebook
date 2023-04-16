@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
+import { Form, Field, ErrorMessage } from 'formik';
 
 export const FormContainer = styled.div`
   text-align: center;
 `;
 
-export const Form = styled.form`
+export const FormEl = styled(Form)`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -25,8 +26,8 @@ export const FormLabel = styled.label`
   }
 `;
 
-export const FormInput = styled.input`
-  width: 500px;
+export const FormInput = styled(Field)`
+  width: 700px;
   font-size: 24px;
   border-radius: 20px;
   border: 1px solid #959595;
@@ -44,6 +45,12 @@ export const FormInput = styled.input`
     border-color: #3160cd;
     box-shadow: 0px 1px 7px 1px #4e4e4e;
   }
+`;
+
+export const ErrorMessageForUser = styled(ErrorMessage)`
+  width: 700px;
+  text-align: justify;
+  font-size: 18px;
 `;
 
 export const FormButton = styled.button`

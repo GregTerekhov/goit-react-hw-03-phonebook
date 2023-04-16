@@ -20,7 +20,7 @@ export const FilterLabel = styled.label`
 `;
 
 export const FilterInput = styled.input`
-  width: 500px;
+  width: 700px;
   font-size: 24px;
   border-radius: 20px;
   border: 1px solid #959595;
